@@ -1,4 +1,4 @@
-#include "Motor.h"
+#include "headers/Motor.h"
 
 Motor::Motor(byte in1Pin, byte in2Pin, byte stbyPin, byte pwmPin, byte pwmChannel) 
 {

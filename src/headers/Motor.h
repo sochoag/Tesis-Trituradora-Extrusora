@@ -3,7 +3,8 @@
 
 #include <Arduino.h>
 
-class Motor {  
+class Motor 
+{  
   private:
     byte in1Pin, in2Pin, stbyPin, pwmPin, pwmChannel, resolution = 8;
     int freq=5000;
