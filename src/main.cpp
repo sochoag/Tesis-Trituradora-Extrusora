@@ -4,21 +4,35 @@
 
 Termocupla temp1(18,5,19);
 
-void readValue(void *parameters)
+static TimerHandle_t termocupla1 = NULL;
+
+void readValue(TimerHandle_t xTimer)
 {
-  while(1)
-  {
-    float termo1 = temp1.readTempC();
-    Serial.println(termo1);
-    vTaskDelay(250/portTICK_PERIOD_MS);
-  }
+  float termo1 = temp1.readTempC();
+  Serial.println(termo1);
+  vTaskDelay(250/portTICK_PERIOD_MS);
 }
 
 
 void setup() 
 {
-  xTaskCreatePinnedToCore(readValue,"Termocupla 1",1024,NULL,1,NULL,1);
   Serial.begin(115200);
+  termocupla1 = xTimerCreate( "Termocupla 1",
+                            10000/portTICK_PERIOD_MS,
+                            pdTRUE,
+                            (void *)0,
+                            readValue);
+  
+  if(termocupla1 == NULL)
+  {
+    Serial.println("Could not create Timer");
+  }
+  else
+  {
+    vTaskDelay(1000/portTICK_PERIOD_MS);
+    Serial.println("Starting timers");
+    xTimerStart(termocupla1, portMAX_DELAY);
+  }
   vTaskDelete(NULL);
 }
 
