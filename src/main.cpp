@@ -1,4 +1,4 @@
-/*#include <Arduino.h>
+#include <Arduino.h>
 #include "headers/Motor.h"
 #include "headers/Termocupla.h"
 
@@ -10,6 +10,7 @@ void readValue(void *parameters)
   {
     float termo1 = temp1.readTempC();
     Serial.println(termo1);
+    vTaskDelay(250/portTICK_PERIOD_MS);
   }
 }
 
@@ -23,7 +24,9 @@ void setup()
 
 void loop() 
 {
-}*/
+}
+
+/*
 
 #include <WiFiManager.h>
 #include <Ticker.h>
@@ -77,3 +80,4 @@ void loop()
     digitalWrite(LED, LOW);
   }
 }
+*/

@@ -1,6 +1,6 @@
 #include "headers/Termocupla.h"
 
-Termocupla::Termocupla(byte SCLK, byte MISO, byte CS)
+Termocupla::Termocupla(byte SCLK, byte CS, byte MISO)
 {
   this->SCLK = SCLK;
   this->MISO = MISO;
@@ -12,7 +12,7 @@ void Termocupla::init(void)
 {
   pinMode(CS, OUTPUT);
   pinMode(SCLK, OUTPUT);
-  pinMode(MISO, OUTPUT);
+  pinMode(MISO, INPUT);
 
   digitalWrite(CS, HIGH);
 }
