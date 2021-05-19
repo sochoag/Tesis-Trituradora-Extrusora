@@ -3,27 +3,28 @@
 #include "headers/Termocupla.h"
 
 Termocupla temp1(18,5,19);
+Termocupla temp2(18,6,19);
+Termocupla temp3(18,7,19);
 
-static TimerHandle_t termocupla1 = NULL;
+static TimerHandle_t temperaturas = NULL;
 
-void readValue(TimerHandle_t xTimer)
+void readTemperatures(TimerHandle_t xTimer)
 {
   float termo1 = temp1.readTempC();
-  Serial.println(termo1);
-  vTaskDelay(250/portTICK_PERIOD_MS);
+  float termo2 = temp2.readTempC();
+  float termo3 = temp3.readTempC();
 }
-
 
 void setup() 
 {
   Serial.begin(115200);
-  termocupla1 = xTimerCreate( "Termocupla 1",
-                            10000/portTICK_PERIOD_MS,
-                            pdTRUE,
-                            (void *)0,
-                            readValue);
+  temperaturas = xTimerCreate( "Temperaturas",              //Nombre Tarea
+                                10000/portTICK_PERIOD_MS,   //Periodo
+                                pdTRUE,                     //Recurrente?
+                                (void *)0,                  //Indetificador
+                                readTemperatures);          //Función a ser llamada
   
-  if(termocupla1 == NULL)
+  if(temperaturas == NULL)
   {
     Serial.println("Could not create Timer");
   }
@@ -31,7 +32,7 @@ void setup()
   {
     vTaskDelay(1000/portTICK_PERIOD_MS);
     Serial.println("Starting timers");
-    xTimerStart(termocupla1, portMAX_DELAY);
+    xTimerStart(temperaturas, portMAX_DELAY);
   }
   vTaskDelete(NULL);
 }
@@ -41,28 +42,13 @@ void loop()
 }
 
 /*
-
 #include <WiFiManager.h>
-#include <Ticker.h>
-
-Ticker ticker;
-
-#define TRIGGER_PIN 0
-
-byte timeout = 60;
-byte LED = LED_BUILTIN;
-
-void tick()
-{
-  digitalWrite(LED, !digitalRead(LED));
-}
 
 void configModeCalback (WiFiManager *myWiFiManager)
 {
   Serial.println("Entered config mode");
   Serial.println(WiFi.softAPIP());
   Serial.println(myWiFiManager->getConfigPortalSSID());
-  ticker.attach_ms(250, tick);
 }
 
 void setup()
