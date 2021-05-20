@@ -3,18 +3,18 @@
 
 #include <WiFiManager.h>
 #include <Losant.h>
-#include <WiFiClientSecure.h>
+#include <WiFiClient.h>
 
 class Conexion
 {
     private:
-        const char* LOSANT_DEVICE_ID = "6070cae9ca605a0007c7b119";
-        const char* LOSANT_ACCESS_KEY = "e965fe6c-d0fc-4745-9aa3-e0b78d680ed2";
-        const char* LOSANT_ACCESS_SECRET = "b2f24d891d40cc64a87c3fb0362a499dd701f70d00a7d31c494a0e99930fc600";
+        //const char* LOSANT_DEVICE_ID = "60a6c59e6b358000068b3a38";
+        const char* LOSANT_ACCESS_KEY = "2c1d7495-dbfd-46a0-b643-a86a9c5eb61d";
+        const char* LOSANT_ACCESS_SECRET = "4b404c08640e148b3495e2ac5469356ca7bd35dc297da424e00424091b7a4323";
         void init(void);
         WiFiManager wm;
-        WiFiClientSecure wifiClient;
-        LosantDevice device;
+        WiFiClient wifiClient;
+        //LosantDevice device;
     public:
         Conexion();
         bool autoConnect(void);
