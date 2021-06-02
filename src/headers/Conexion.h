@@ -16,6 +16,7 @@ class Conexion
         WiFiClient wifiClient;
         //LosantDevice device;
     public:
+        int i = 0;
         Conexion();
         bool autoConnect(void);
         void report();

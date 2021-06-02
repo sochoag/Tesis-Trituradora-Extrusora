@@ -2,8 +2,9 @@
 #include "headers/Motor.h"
 #include "headers/Termocupla.h"
 #include "headers/Conexion.h"
+#include "headers/OLED.h"
 
-Termocupla temp1(18,5,19);
+/*Termocupla temp1(18,5,19);
 //Termocupla temp2(18,6,19);
 //Termocupla temp3(18,7,19);
 
@@ -58,4 +59,36 @@ void setup()
 
 void loop() 
 {
+}*/
+
+Oled oled;
+
+void setup(void)
+{
+  Serial.begin(115200);
+  delay(1000);
+  oled.init();
+}
+
+int cont = 0;
+int i = 0;
+
+void loop(void)
+{
+  oled.paginaInicial();
+  delay(1000);
+  for(oled.i=0;oled.i<=100;oled.i++)
+  {
+    oled.paginaCargando(); 
+  }
+  for(oled.i=100;oled.i>1;oled.i=oled.i-10)
+  {
+    Serial.println(oled.i);
+    oled.paginaCargando(); 
+  }
+  for(int a=0;a<=10;a++)
+  {
+    oled.paginaMonitor();
+    delay(500); 
+  }
 }
