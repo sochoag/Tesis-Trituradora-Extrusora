@@ -35,7 +35,7 @@ void setup()
   Serial.println("Respuesta: "+String(respuesta));
   conexion.report();
   temperaturas = xTimerCreate( "Temperaturas",              //Nombre Tarea
-                                10000/portTICK_PERIOD_MS,   //Periodo
+                                5000/portTICK_PERIOD_MS,    //Periodo
                                 pdTRUE,                     //Recurrente?
                                 (void *)0,                  //Indetificador
                                 readTemperatures);          //Función a ser llamada
