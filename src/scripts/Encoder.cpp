@@ -23,3 +23,8 @@ void Encoder::ISREnc()
     Serial.println(t0-t00); 
   }
 }
+
+byte getVelocidad()
+{
+  //Implementar codigo velocidad aqui
+}

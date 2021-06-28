@@ -14,6 +14,6 @@ class Encoder
     Encoder(byte chAPin, byte chBPin);
     void init();
     void ISREnc();
+    byte getVelocidad();
 };
-
 #endif
